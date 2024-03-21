@@ -17,16 +17,16 @@
 ---
 
 ## 🌏 前言
-- [在线文档：https://github.com/oamlab/victoriametrics](https://github.com/oamlab/victoriametrics)
+- [在线文档：https://gitee.com/oamlab/victoriametrics](https://gitee.com/oamlab/victoriametrics)
 - [Online Documentation：https://github.com/oamlab/victoriametrics](https://github.com/oamlab/victoriametrics/blob/main/README.English.md)
 
-*[国内访问请使用国内资料仓gitee入口，点击进入](https://gitee.com/oamlab/victoriametrics)
+*[国际访问请使用国际资料仓github入口，点击进入](https://github.com/oamlab/victoriametrics)
 
 ## 🔋 仓库联系人
-| 姓名						 | 联系方式       |
-|----------|------------|
-| **xxx**  | xxx@qq.com |
-| **xxx**  | xxx@qq.com |
+| 姓名						 |联系方式|
+|----------|-----------------|
+| **况波**   |   1214966109@qq.com |
+| **李渊荣**  |   584194788@qq.com |
 
 ## 🔒 背景
 - XXX
