@@ -21,16 +21,16 @@
 - [Online Documentation：https://github.com/oamlab/victoriametrics](https://github.com/oamlab/victoriametrics/blob/main/README.English.md)
 
 ## 🔋 Repository Contact
-| Full Name						 |CONTACT|
-|----------|-----------------|
-| **Kuang Bo**   |   1214966109@qq.com |
-| **Li Yuanrong**  |   584194788@qq.com |
+| Full Name						 | CONTACT           |
+|----------------|-------------------|
+| **Sivin Liu**  | 13147126836@163.com |
+| **XXX**        | xxx@xx.com        |
 
 ## 🔒 Background
-- XXX
+- Improve monitoring system performance.
 
 ## 🔑 Purpose
-- XXX
+- VictoriaMetrics is a fast, cost-effective and scalable monitoring solution and time series database.
 
 ## 📚 Currently Sharing Content：
 
