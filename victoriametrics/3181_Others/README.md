@@ -1263,7 +1263,7 @@ spec:
           name: ruler
 ```
 
-#### 备份与恢复
+### 备份与恢复
 
 victoria-metrics 提供了与备份相关的两个二进制程序
 
@@ -1275,7 +1275,7 @@ victoria-metrics 备份操作过程主要就是两步
 - 通过 http api 创建快照
 - 通过 二进制程序生成备份数据
 
-##### 创建快照
+#### 创建快照
 
 victoria-metrics 提供了 http api，这里需要先获取各 vmstorage pod 的 ip
 
@@ -1298,7 +1298,7 @@ kubectl logs -f -n kube-vm vmstorage-0
 {"ts":"2024-03-21T06:14:25.139Z","level":"info","caller":"VictoriaMetrics/lib/storage/storage.go:387","msg":"created Storage snapshot for \"/storage/vmstorage-0\" at \"/storage/vmstorage-0/snapshots/20240321061424-17BDCF2E8FE38CB0\" in 0.273 seconds"}
 ```
 
-##### 查看快照
+#### 查看快照
 
 ```shell
 [root@aaa ~]# curl  10.0.2.211:8482/snapshot/list
@@ -1306,7 +1306,7 @@ kubectl logs -f -n kube-vm vmstorage-0
 "20240321061424-17BDCF2E8FE38CB0"
 ```
 
-##### 查看数据
+#### 查看数据
 
 ```shell
 ├── metadata
@@ -1321,7 +1321,7 @@ kubectl logs -f -n kube-vm vmstorage-0
             └── minTimestampForCompositeIndex
 ```
 
-##### 执行全量备份
+#### 执行全量备份
 
 ```shell
 # 下载vmbackup、vmrestore
@@ -1352,7 +1352,7 @@ mv vmbackup  vmrestore  /usr/local/bin/
 2024-03-21T07:14:12.104Z        info    VictoriaMetrics/app/vmbackup/main.go:112        successfully shut down http server for metrics in 0.000 seconds
 ```
 
-##### 查看全量备份
+#### 查看全量备份
 
 ```bash
 cd /data/k8s/vmstorage-0
@@ -1382,7 +1382,7 @@ tree -L 3
 17 directories, 2 files
 ```
 
-##### 模拟故障
+#### 模拟故障
 
 ```bash
 #数据丢失
@@ -1394,7 +1394,7 @@ $ tree
 └── vmstorage-1
 ```
 
-##### 回滚数据
+#### 回滚数据
 
 ```shell 
 
