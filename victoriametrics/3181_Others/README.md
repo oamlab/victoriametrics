@@ -1,10 +1,21 @@
-## 简介
+- OAMlab
+- https://github.com/oamlab
+
+# 关于部署VictoriaMetrics的概要资料(Overview of deploying VictoriaMetrics)
+
+---
+
+# VictoriaMetrics
+
+
+## For Install VictoriaMetrics 1.76.1
+
+
+### 简介
 
 说到云原生监控方案，第一时间基本上都会想到 Prometheus+AlertManager+Grafana 的一套成熟解决方案。 Prometheus 作为监控核心，具备强大的数据模型、高效率运作、丰富的监控能力、强大的查询语言 PromQL、 简单易用、管理方便等特点。但是 Prometheus 目前在高可用层面上做得还并不完美。为此，在开源社区中， 孕育出了许多替代、增强方案，VictoriaMetrics 属于其中较为优异的一个，是一个快速、经济高效且可扩展的监控解决方案和时间序列数据库。
 
-
-
-## 特点
+### 特点
 
 1. 它可以作为 Prometheus 的长期储存，且支持 Prometheus 查询 API，可以在 Grafana 中用作 Prometheus 的代替品；
 2. 部署简单，无论是单节点版本还是集群版本，都只需要运行所需的组件可执行文件（每个组件都是一个可执行文件），运行前不需要安装任何依赖，易于设置和操作；
@@ -14,11 +25,7 @@
 6. 具有高延迟 IO 和低 IOPS；
 7. 支持从第三方时序数据库获取数据源。
 
-
-
-
-
-## 软件版本
+### 软件版本
 
 ```yaml
 prom/prometheus:v2.31.1
@@ -27,28 +34,22 @@ grafana/grafana:8.3.3
 victoriametrics/victoria-metrics:v1.76.1
 ```
 
+### 操作系统版本
 
+````
+CentOS Stream 9 x86 64
+https://mirrors.tuna.tsinghua.edu.cn/centos-stream/9-stream/BaseOS/x86_64/iso/CentOS-Stream-9-latest-x86_64-boot.iso
+````
 
-## 操作系统版本C7?C9?
-
-```yaml
-# redhat9
-5.14.0-284.11.1.el9_2.x86_64
-```
-
-
-
-## 软件包链接
+### 软件包链接
 
 ```
-/
+docker pull xxx
 ```
 
+### 安装过程
 
-
-## 安装过程
-
-### 架构
+#### 架构
 
 VM 分为单节点和集群两个方案，根据业务需求选择即可。单节点版直接运行一个二进制文件既，官方建议采集数据点(data points)低于 100w/s，推荐 VM 单节点版，简单好维护，但不支持告警。集群版支持数据水平拆分。下图是 `VictoriaMetrics` 集群版官方的架构图。
 
@@ -62,11 +63,9 @@ VM 分为单节点和集群两个方案，根据业务需求选择即可。单�
 - vmagent: 数据指标抓取，支持多种后端存储，会占用本地磁盘缓存，默认端口8429
 - vmalert: 报警相关组件，如果不需要告警功能可以不使用该组件，默认端口为8880 
 
+#### 安装监控
 
-
-### 监控安装
-
-#### node_export安装
+##### 安装node_export
 
 ```yaml
 apiVersion: apps/v1
@@ -149,9 +148,7 @@ spec:
             path: /
 ```
 
-
-
-#### Prometheus配置
+##### 配置Prometheus
 
 ```yaml
 # configmap
@@ -171,9 +168,7 @@ data:
       - targets: ['x.x.x.x:9100', 'x.x.x.x:9100', 'x.x.x.x:9100','x.x.x.x:9100']
 ```
 
-
-
-#### 安装prometheus
+##### 安装prometheus
 
 ```yaml
 # prometheus-deploy.yaml
@@ -240,9 +235,7 @@ spec:
   storageClassName: nfs-csi
 ```
 
-
-
-#### 安装grafana
+##### 安装grafana
 
 ```yaml
 # grafana.yaml
@@ -333,9 +326,7 @@ spec:
   storageClassName: nfs-csi
 ```
 
-
-
-#### 查看Prometheus采集数据
+##### 查看Prometheus采集数据
 
 <p align="center">
 	<img alt="typora-user-images" src="./typora-user-images/image-20240315131726020.png">
@@ -345,10 +336,9 @@ spec:
 	<img alt="typora-user-images" src="./typora-user-images/image-20240315131806575.png">
 </p>
 
+#### 安装victoriaMetrics
 
-### victoriaMetrics
-
-#### 单节点安装
+##### 安装（单节点）
 
 ```yaml
 # victoria-metrics.yaml
@@ -419,9 +409,7 @@ spec:
   storageClassName: nfs-csi
 ```
 
-
-
-#### victoria-metrics数据存储
+##### victoria-metrics数据存储
 
 ```yaml
 # tree 
@@ -542,9 +530,7 @@ spec:
     └── searchResults
 ```
 
-
-
-#### 替换数据源victoria-metrics
+##### 替换数据源victoria-metrics
 
 ```
 # 关闭Promtheus后在更新数据源
@@ -553,7 +539,6 @@ spec:
 <p align="center">
 	<img alt="typora-user-images" src="./typora-user-images/image-20240315132102580.png">
 </p>
-
 
 **数据展示正常，说明victoria-metrics数据正常**
 <p align="center">
@@ -568,15 +553,12 @@ spec:
 	<img alt="typora-user-images" src="./typora-user-images/image-20240315132538897.png">
 </p>
 
-
-#### 集群节点安装
+##### 安装集群节点
 
 ```shell
 # 创建ns
 kubectl create ns kube-vm	
 ```
-
-
 
 ```yaml
 # rbac.yml
@@ -626,8 +608,6 @@ subjects:
     name: vmagent-sa
     namespace: kube-vm
 ```
-
-
 
 ```yaml
 # vmstorage.yml
@@ -740,8 +720,6 @@ spec:
               port: http
 ```
 
-
-
 ```yaml
 # vmselect.yaml
 ---
@@ -815,9 +793,7 @@ spec:
             periodSeconds: 15
             timeoutSeconds: 5
             failureThreshold: 3
-```
-
-
+````
 
 ```yaml
 # vminsert.yaml
@@ -857,10 +833,15 @@ spec:
       volumes:
         - name: cache-volume
           emptyDir: {}
+```
+
+```shell
 [root@FVK8S-KFCS941 cluster-vm]# ls
 rbac.yaml  storage.yaml  vmagent-cm.yaml  vmagent.yaml  vminsert.yaml  vmselect.yaml
 [root@FVK8S-KFCS941 cluster-vm]# 
 [root@FVK8S-KFCS941 cluster-vm]# cat vminsert.yaml  
+```
+```yaml
 ---
 apiVersion: v1
 kind: Service
@@ -925,8 +906,6 @@ spec:
             timeoutSeconds: 5
             failureThreshold: 3
 ```
-
-
 
 ```yaml
 # configmap-vmagent-config.yml
@@ -1054,8 +1033,6 @@ data:
         target_label: node
 ```
 
-
-
 ```yaml
 # vmagent.yaml
 ---
@@ -1156,11 +1133,7 @@ spec:
               containerPort: 8429
 ```
 
-
-
-
-
-**安装alertmanager**
+##### 安装alertmanager
 
 ```yaml
 # alertmanager
@@ -1220,11 +1193,9 @@ spec:
               name: cfg
 ```
 
+##### 安装vmalert
 
-
-**安装vmalert**
-
-**vmalert configmap**
+- vmalert configmap
 
 ```yaml
 # vmalert-config.yaml
@@ -1250,9 +1221,7 @@ data:
           agent: "vmalert"
 ```
 
-
-
-**vmalert Deployment**
+- vmalert Deployment
 
 ```yaml
 ---
@@ -1293,35 +1262,7 @@ spec:
           name: ruler
 ```
 
-
-
-
-
-## 相关文件路径
-
-
-
-## 启动和停止
-
-
-
-## 使用方法
-
-
-
-## 管理面板
-
-
-
-##  有无计划任务
-
-
-
-## 备份与恢复
-
-
-
-#### 集群备份
+#### 备份与恢复
 
 victoria-metrics 提供了与备份相关的两个二进制程序
 
@@ -1333,9 +1274,7 @@ victoria-metrics 备份操作过程主要就是两步
 - 通过 http api 创建快照
 - 通过 二进制程序生成备份数据
 
-
-
-#### 创建快照
+##### 创建快照
 
 victoria-metrics 提供了 http api，这里需要先获取各 vmstorage pod 的 ip
 
@@ -1344,8 +1283,6 @@ victoria-metrics 提供了 http api，这里需要先获取各 vmstorage pod 的
 [root@aaa ~]# curl  10.0.2.211:8482/snapshot/create
 {"status":"ok","snapshot":"20240321061424-17BDCF2E8FE38CB0"}
 ```
-
-
 
 ```shell
 kubectl logs -f -n kube-vm vmstorage-0 
@@ -1360,9 +1297,7 @@ kubectl logs -f -n kube-vm vmstorage-0
 {"ts":"2024-03-21T06:14:25.139Z","level":"info","caller":"VictoriaMetrics/lib/storage/storage.go:387","msg":"created Storage snapshot for \"/storage/vmstorage-0\" at \"/storage/vmstorage-0/snapshots/20240321061424-17BDCF2E8FE38CB0\" in 0.273 seconds"}
 ```
 
-
-
-#### 快照查看
+##### 查看快照
 
 ```shell
 [root@aaa ~]# curl  10.0.2.211:8482/snapshot/list
@@ -1370,9 +1305,7 @@ kubectl logs -f -n kube-vm vmstorage-0
 "20240321061424-17BDCF2E8FE38CB0"
 ```
 
-
-
-#### 查看数据
+##### 查看数据
 
 ```shell
 ├── metadata
@@ -1387,17 +1320,13 @@ kubectl logs -f -n kube-vm vmstorage-0
             └── minTimestampForCompositeIndex
 ```
 
-
-
-#### 全量备份
+##### 执行全量备份
 
 ```shell
 # 下载vmbackup、vmrestore
 chmod +x vmbackup  vmrestore
 mv vmbackup  vmrestore  /usr/local/bin/
 ```
-
-
 
 ```shell
 # 全量备份
@@ -1422,9 +1351,7 @@ mv vmbackup  vmrestore  /usr/local/bin/
 2024-03-21T07:14:12.104Z        info    VictoriaMetrics/app/vmbackup/main.go:112        successfully shut down http server for metrics in 0.000 seconds
 ```
 
-
-
-#### 查看全量备份
+##### 查看全量备份
 
 ```bash
 cd /data/k8s/vmstorage-0
@@ -1454,9 +1381,7 @@ tree -L 3
 17 directories, 2 files
 ```
 
-
-
-#### 故障模拟
+##### 模拟故障
 
 ```bash
 #数据丢失
@@ -1468,9 +1393,7 @@ $ tree
 └── vmstorage-1
 ```
 
-
-
-#### 数据回滚
+##### 回滚数据
 
 ```shell 
 
@@ -1488,11 +1411,9 @@ $ tree
 #vmrestore  -src=fs:///data/k8s/vmstorage-1/ -storageDataPath=/data/k8s/kube-vm-vmstore-local-pvc-pvc-18b6186a-8401-49dc-ad61-d4c47ce8fc05/vmstorage-1/
 ```
 
-
-
 ## 其他FAQ
-
-
-
-
-
+- 相关文件路径
+- 启动和停止
+- 使用方法
+- 管理面板
+- 计划任务
