@@ -337,10 +337,13 @@ spec:
 
 #### 查看Prometheus采集数据
 
-![image-20240315131726020](.\typora-user-images\image-20240315131726020.png)
+<p align="center">
+	<img alt="typora-user-images" src="./typora-user-images/image-20240315131726020.png">
+</p>
 
-![image-20240315131806575](.\typora-user-images\image-20240315131806575.png)
-
+<p align="center">
+	<img alt="typora-user-images" src="./typora-user-images/image-20240315131806575.png">
+</p>
 
 
 ### victoriaMetrics
@@ -547,16 +550,23 @@ spec:
 # 关闭Promtheus后在更新数据源
 ```
 
-![image-20240315132102580](.\typora-user-images\image-20240315132102580.png)
+<p align="center">
+	<img alt="typora-user-images" src="./typora-user-images/image-20240315132102580.png">
+</p>
+
 
 **数据展示正常，说明victoria-metrics数据正常**
+<p align="center">
+	<img alt="typora-user-images" src="./typora-user-images/image-20240315132327613.png">
+</p>
 
-![image-20240315132327613](.\typora-user-images\image-20240315132327613.png)
+<p align="center">
+	<img alt="typora-user-images" src="./typora-user-images/image-20240315132602508.png">
+</p>
 
-![image-20240315132602508](.\typora-user-images\image-20240315132602508.png)
-
-![image-20240315132538897](.\typora-user-images\image-20240315132538897.png)
-
+<p align="center">
+	<img alt="typora-user-images" src="./typora-user-images/image-20240315132538897.png">
+</p>
 
 
 #### 集群节点安装
