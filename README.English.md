@@ -21,10 +21,10 @@
 - [Online Documentation：https://github.com/oamlab/victoriametrics](https://github.com/oamlab/victoriametrics/blob/main/README.English.md)
 
 ## 🔋 Repository Contact
-| Full Name						 | CONTACT           |
-|----------------|-------------------|
+| Full Name						 | CONTACT             |
+|----------------|---------------------|
 | **Sivin Liu**  | 13147126836@163.com |
-| **XXX**        | xxx@xx.com        |
+| **XXX**        | xxx@xxx.com         |
 
 ## 🔒 Background
 - Improve monitoring system performance.
