@@ -17,16 +17,16 @@
 ---
 
 ## 🌏 前言
-- [在线文档：https://github.com/oamlab/victoriametrics](https://github.com/oamlab/victoriametrics)
+- [在线文档：https://gitee.com/oamlab/victoriametrics](https://gitee.com/oamlab/victoriametrics)
 - [Online Documentation：https://github.com/oamlab/victoriametrics](https://github.com/oamlab/victoriametrics/blob/main/README.English.md)
 
-*[国内访问请使用国内资料仓gitee入口，点击进入](https://gitee.com/oamlab/victoriametrics)
+*[国际访问请使用国际资料仓github入口，点击进入](https://github.com/oamlab/victoriametrics)
 
 ## 🔋 仓库联系人
 | 姓名						 | 联系方式                |
 |----------|---------------------|
 | **刘思雨**  | 13147126836@163.com |
-| **xxx**  | xxx@xxx.com         |
+| **XXX**  | xxx@xxx.com         |
 
 ## 🔒 背景
 - 提高监控系统性能。
