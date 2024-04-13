@@ -23,7 +23,7 @@
 ## 🔋 Repository Contact
 | Full Name						 | CONTACT             |
 |----------------|---------------------|
-| **Sivin Liu**  | 13147126836@163.com |
+| **Sivin Liu**  | 2176804187@qq.com |
 | **XXX**        | xxx@xxx.com         |
 
 ## 🔒 Background
